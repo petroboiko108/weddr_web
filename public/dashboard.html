@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Weddrapp.com</title>
+        <link rel="shortcut icon" href="../image/ic_title.png" />
+
+        <!-- Bootstrap -->
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--side menu plugin-->
+        <link href="assets/plugins/hoe-nav/hoe.css" rel="stylesheet">
+        <!-- icons-->
+        <link href="assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet">
+        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/plugins/lightbox2/dist/css/lightbox.css" rel="stylesheet">
+        <!--template custom css file-->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/gallery.css">
+
+        <script src="assets/js/modernizr.js"></script>
+
+        <link rel="stylesheet" href="videopopup/simple-overlay.css">
+        <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+    </head>
+    <body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout">
+
+        <!--side navigation start-->
+        <div id="hoeapp-wrapper" class="hoe-hide-lpanel" hoe-device-type="desktop">
+          <header id="hoe-header" hoe-lpanel-effect="shrink">
+              <div class="hoe-left-header">
+                  <a href="#"> <span>Weddr</span></a>
+                  <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+              </div>
+
+              <div class="hoe-right-header" hoe-position-type="relative">
+                  <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+                  <ul class="left-navbar">
+                      <li>
+                          <div class="top-search hidden-xs">
+                              <form>
+                                  <input type="text" class="form-control" placeholder="Search here">
+                                  <i class="ion-search"></i>
+                              </form>
+                          </div>
+                      </li>
+
+                  </ul>
+
+                  <ul class="right-navbar navbar-right">
+                      <li class="dropdown">
+                          <a href="#" data-toggle="dropdown" class="dropdown-toggle"><label>Shoot codes</label></a>
+                          <ul class="dropdown-menu dropdown-menu-scale user-dropdown" id = "menu_shootcodes"></ul>
+                      </li>
+                      <li class="dropdown">
+                          <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="assets/images/uk.png" alt="">United Kingdom</a>
+                      </li>
+                      <li class="dropdown">
+                          <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img id = "nav_userphoto" src="assets/images/avtar.png" alt="" width="30" height = "30" class="img-circle"><label id="nav_username">Emily Doe</label></a>
+                          <ul class="dropdown-menu dropdown-menu-scale user-dropdown">
+                              <li><a href="profile.html"><i class="ion-person"></i> Profile </a></li>
+                              <li><a href="settings.html"><i class="ion-settings"></i> Settings </a></li>
+                              <li><a href="../../views/index.html"><i class="ion-log-out"></i> Logout </a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+
+          </header>
+            <div id="hoeapp-container" hoe-color-type="lpanel-bg7" hoe-lpanel-effect="shrink">
+              <aside id="hoe-left-panel" hoe-position-type="absolute">
+                  <ul class="nav panel-list">
+                      <li class="active">
+                          <a href="dashboard.html">
+                              <i class="fa fa-home"></i>
+                              <span class="menu-text">Dashboard</span>
+                              <span class="selected"></span>
+                          </a>
+                      </li>
+                      <li class="hoe-has-menu" >
+                          <a href="javascript:void(0)">
+                              <i class="fa fa-user"></i>
+                              <span class="menu-text">User Profile</span>
+                              <span class="selected"></span>
+                          </a>
+                          <ul class="hoe-sub-menu">
+                              <li>
+                                  <a href="profile.html">
+                                      <span class="menu-text">Profile</span>
+                                      <span class="selected"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="settings.html">
+                                      <span class="menu-text">Settings</span>
+                                      <span class="selected"></span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                  </ul>
+                </aside>
+                <section id="main-content">
+                    <div class="space-30"></div>
+                    <div class="container">
+                            <div>
+                                <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
+                                    <li role="presentation" class="active"><a href="#videogallery" aria-controls="videogallery" role="tab" data-toggle="tab"><i class="ion-videocamera"></i>Video</a></li>
+                                    <li role="presentation"><a href="#imagegallery" aria-controls="imagegallery" role="tab" data-toggle="tab"><i class="ion-images"></i>Image</a></li>
+                                </ul>
+
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="videogallery">
+                                    <div class="row" id = "videos">
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="imagegallery">
+                                  <div class="row" id = "images">
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--footer start-->
+                    <div class="footer">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span>&copy; Copyright 2017. Weddr</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--footer end-->
+                </section><!--end main content-->
+            </div>
+        </div><!--end wrapper-->
+
+
+
+        <!--Common plugins-->
+        <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/plugins/hoe-nav/hoe.js"></script>
+        <script src="assets/plugins/pace/pace.min.js"></script>
+        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <!--page script-->
+        <script src="assets/plugins/lightbox2/dist/js/lightbox.min.js"></script>
+        <script src="videopopup/simple-overlay.js"></script>
+        <script>
+            $(document).ready(function(){
+              var kAwsLink = 'https://s3-eu-west-1.amazonaws.com/iosweddrtest/';
+              var imagepattern = '-image';
+              var arrURL = new Array();
+              var arrNames = new Array();
+              var arrCreatedAt = new Array();
+              var arrImageURL = new Array();
+              var arrImageNames = new Array();
+              var arrImageCreatedAt = new Array();
+                $.get('/getshootcodelist',function(result){
+                    if (result.status == 'success') {
+                      var shootcodelist = new Array();
+                      var tempMenuHtml = '';
+                      var innerMenuHtml = '';
+                      result.data.forEach(function(one){
+                         var shootcode = one.Prefix.replace('/', '');
+                         if (shootcode != "WatermarkImage") {
+                           shootcodelist.push(shootcode);
+                           tempMenuHtml = '<li class = "shootcodeitem" id = "'+ shootcode +'"><a href="#"><span class="selected"></span><span class="menu-text">'+ shootcode +'</span></a></li>';
+                           innerMenuHtml = innerMenuHtml + tempMenuHtml;
+                         }
+                      });
+
+                      if (shootcodelist.length > 0) {
+                        getlistObjectsWithShootcode(shootcodelist[0]);
+                      }
+                      $('#menu_shootcodes').html(innerMenuHtml);
+                    }else{
+                      alert('There was an error listing your files');
+                    }
+                });
+
+
+                getAnUser();
+                function getAnUser()
+                {
+                  $.get('/getanuser',function(result){
+                      if (result.status == "error") {
+                          alert('Can not connect database.');
+                      }else if(result.status == "not exist"){
+                          alert('Please login again');
+                      }else{
+                          $('#nav_username').text(result.data.name);
+                          $('#nav_userphoto').attr('src',result.data.photo);
+                      }
+                  });
+                }
+
+                $('#menu_shootcodes').on('click','.shootcodeitem',function(){
+                  var obj = $(this);
+                  var id = this.id;
+                  console.log('clicked shoot code '+ id);
+                  getlistObjectsWithShootcode(id);
+                });
+
+
+
+                  $('#videos').on('click','.responsivevideo',function(){
+                    var obj = $(this);
+                    console.log(obj);
+                    var id = this.id;
+                    console.log(id);
+                  });
+                  $('.videopopup').simpleOverlay({
+                    "insertBy": "embed",
+                    "attribute": "data-link"
+                  });
+
+                  $('#images').on('click','.responsiveimage',function(){
+                    var obj = $(this);
+                    console.log(obj);
+                    var id = this.id;
+                    console.log(id);
+                  });
+
+                  $('#images').on('click','.download',function(){
+                    var obj = $(this);
+                    console.log(obj);
+                    var id = this.id;
+                    console.log(id);
+                    var url = kAwsLink + arrImageURL[id];
+                    $.post('/downloadfile', {url ,url },function(result){
+                        if (result.status == "success") {
+                            console.log('download Ok');
+                        }else{
+                            alert('Can not download this file');
+                        }
+                    });
+                  });
+                  function getlistObjectsWithShootcode(code){
+                      arrURL = new Array();
+                      arrNames = new Array();
+                      arrCreatedAt = new Array();
+                      arrImageURL = new Array();
+                      arrImageNames = new Array();
+                      arrImageCreatedAt = new Array();
+                      $.post('/getlistObjectsWithShootcode',{shootcode:code},function(result){
+                          if (result.status == "success" && result.data.length > 0) {
+                            var innerVideoHtml = '';
+                            var tempVideoHtml = '';
+
+                            var innerImageHtml = '';
+                            var tempImageHtml = '';
+                            for (var index = 0; index < result.data.length; index ++)
+                            {
+                                if (result.data[index].Key.includes(imagepattern) ==  false)
+                                {
+                                   var arrTempNames =  new Array();
+                                   arrURL.push(result.data[index].Key);
+                                   arrTempNames = result.data[index].Key.split('-');
+                                   arrNames.push(arrTempNames[arrTempNames.length - 1].replace('.mp4','').replace('_',' '));
+                                   arrCreatedAt.push(result.data[index].LastModified.split('.')[0].replace('T',' '));
+                                }else{
+                                  var arrImageTempNames =  new Array();
+                                  arrImageURL.push(result.data[index].Key);
+                                  arrImageTempNames = result.data[index].Key.split('-');
+                                  arrImageNames.push(arrImageTempNames[arrImageTempNames.length - 2].replace('_',' '));
+                                  arrImageCreatedAt.push(result.data[index].LastModified.split('.')[0].replace('T',' '));
+                                }
+                            }
+
+
+                            if (arrURL.length>0) {
+                              for (var index1 = 0; index1 < arrURL.length; index1 ++)
+                              {
+                                // var videopopuplink = '<iframe src="' + kAwsLink + arrURL[index1] + '" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                                tempVideoHtml = '<div class="col-md-3 col-sm-6">'+
+                                                    '<div class="responsivevideo" id = "' + index1 +'">' +
+                                                        '<div class="gallery">' +
+                                                            // '<a href="#" data-link='+ videopopuplink +'class="videopopup">' +
+                                                            '<video controls><source src="'+ kAwsLink + arrURL[index1] + '" type="video/mp4">'+
+                                                            '</video>' +
+                                                            '<div class="desc">' + arrNames[index1] + '  ' + arrCreatedAt[index1] +
+                                                            '</div>' +
+                                                          '</div>'+
+                                                        '</div>'+
+                                                      '</div>'
+                                innerVideoHtml = innerVideoHtml + tempVideoHtml;
+                              }
+                              $('#videos').html(innerVideoHtml);
+                            }
+
+                            if (arrImageURL.length>0) {
+                              for (var index2 = 0; index2 < arrImageURL.length; index2 ++)
+                              {
+
+                                tempImageHtml = '<div class="col-md-3 col-sm-6">' +
+                                                '<a class="gallery-box" href="' + kAwsLink + arrImageURL[index2] +'" data-lightbox="gallery">' +
+                                                    '<div class="responsiveimage id = "'+ index2 +'">' +
+                                                      '<div class="gallery">' +
+                                                        '<img src="' + kAwsLink + arrImageURL[index2] + '">' +
+
+                                                      '</div>' +
+                                                    '</div>' +
+                                                '</a>' + '<div class="descimage">' + arrImageNames[index2]
+                                                + '  '+ arrImageCreatedAt[index2] + '<i id = "'+ index2 +'" class="download fa fa-download"></i>'+'</div>' +
+                                            '</div>'
+                                innerImageHtml = innerImageHtml + tempImageHtml;
+                              }
+                              $('#images').html(innerImageHtml);
+                            }
+                          }else{
+                              alert('There is no video!');
+                          }
+                      });
+                  }
+
+            });
+        </script>
+    </body>
+</html>

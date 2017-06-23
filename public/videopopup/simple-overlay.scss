@@ -1,0 +1,90 @@
+/*------------------------------------------------------------------
+	jQuery simple overlay styles
+	------------------------------------------------------------------- */
+
+$overlay-width: 640px;
+$overlay-height: 360px;
+$overlay-mask-background-color: rgba(#000, .8);
+$overlay-wrapper-background-color: #FFFFFF;
+$overlay-close-background-color: #C0392B;
+$overlay-box-shadow: 0 3px 20px rgba(0, 0, 0, .5);
+
+.simple-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: $overlay-mask-background-color;
+}
+
+.simple-overlay__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  overflow: hidden;
+
+  width: $overlay-width;
+  height: $overlay-height;
+  margin-top: ($overlay-height / 2 ) * -1;
+  margin-left: ($overlay-width / 2) * -1;
+
+  background-color: $overlay-wrapper-background-color;
+  box-shadow: $overlay-box-shadow;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: $overlay-width * 1.2), (max-height: $overlay-height * 1.2) {
+    position: relative;
+    top: auto;
+    left: auto;
+
+    width: 100%;
+    height: 100%;
+    margin-top: auto;
+    margin-left: auto;
+  }
+}
+
+.simple-overlay__close {
+  position: absolute;
+  z-index: 99999;
+  top: 50%;
+  left: 50%;
+
+  width: 30px;
+  height: 30px;
+  margin-top: (($overlay-height / 2) * -1) - 10px;
+  margin-left: (($overlay-width / 2) * -1) - 10px;
+
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+
+  border-radius: 30px;
+  background-color: $overlay-close-background-color;
+  box-shadow: $overlay-box-shadow;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNy44IDM3LjgiPjxwb2x5Z29uIHBvaW50cz0iMzAuNDggMCAxOC45IDExLjU4IDcuMzIgMCAwIDcuMzIgMTEuNTggMTguOSAwIDMwLjQ4IDcuMzIgMzcuOCAxOC45IDI2LjIxIDMwLjQ4IDM3LjggMzcuOCAzMC40OCAyNi4yMSAxOC45IDM3LjggNy4zMiAzMC40OCAwIiBzdHlsZT0iZmlsbDojZmZmIi8+PC9zdmc+);
+
+  background-size: 15px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  &:hover {
+    background-color: darken($overlay-close-background-color, 10%);
+  }
+
+  @media (max-width: $overlay-width * 1.2), (max-height: $overlay-height * 1.2) {
+    top: 10px;
+    left: 10px;
+
+    margin-top: auto;
+    margin-left: auto;
+  }
+}

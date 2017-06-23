@@ -1,0 +1,75 @@
+<%include ./login.html%>
+<!-- <!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>Weddrapp.com</title>
+  <link rel="shortcut icon" href="/image/ic_title.png" />
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <body>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h2>Join with shoot code</h2>
+			</div>
+
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="shoot code" id="login-name">
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+
+				<a class="btn btn-primary btn-large btn-block" id = "join" href="#">Join</a>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+      $(document).ready(function(){
+          $("#join").click(function(){
+              var isRecognized = false;
+              var shootcodeinput = $("#login-name").val().trim().replace(/\s/g,'');
+              if (shootcodeinput == "") {
+                 alert('Please enter correct shoot code');
+              }else{
+                  $.post('/getshootcodelist',{shootcode:shootcodeinput},function(result){
+                    if (result.status == 'success') {
+                      console.log(result.data);
+                      result.data.forEach(function(one){
+                         var shootcode = one.Prefix.replace('/', '');
+
+                         console.log(shootcode);
+                         if (shootcode == shootcodeinput)
+                         {
+                           isRecognized = true;
+                           location.href = "/galleryvideo.html"
+                           localStorage.setItem('selectedshootcode',shootcode);
+                           return false;
+                         }
+                      });
+                      if (!isRecognized) {
+                        alert('Shoot code not recognized');
+                      }
+                    }else{
+                      alert('There was an error listing your files');
+                    }
+
+                });
+              }
+          });
+      });
+</script>
+
+</body>
+</html> -->

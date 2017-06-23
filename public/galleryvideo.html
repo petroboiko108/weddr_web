@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>Weddrapp.com</title>
+  <link rel="shortcut icon" href="/image/ic_title.png" />
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="/galleryvideo.html">Home</a>
+    <a href="#">Videos</a>
+    <a href="/galleryimage.html">Images</a>
+    <a href="/dashboard.html">About</a>
+    <a href="../views/index.html" style="float:right;">Logout</a>
+  </div>
+  <div id="splash" >  <video id = "videoshow" controls>
+    <source src="/video/1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div id = "content_gallery">
+  </div>
+
+  <div class="clearfix"></div>
+
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+        $(document).ready(function(){
+            var imagepattern = '-image';
+            var arrURL = new Array();
+            var arrNames = new Array();
+            var arrCreatedAt = new Array();
+            var kAwsLink = 'https://s3-eu-west-1.amazonaws.com/iosweddrtest/';
+            var vid = document.getElementById("videoshow");
+            console.log('selectedshootcode ' + localStorage['selectedshootcode']);
+            var shootcode = 'me&me17356';
+            $(function (){
+                getlistObjectsWithShootcode();
+            });
+
+            $('#content_gallery').on('click','.gallery',function(){
+              var obj = $(this);
+              console.log(obj);
+              var id = this.id;
+              console.log(id);
+              $('#videoshow').attr('src',kAwsLink + arrURL[id]);
+              vid.play();
+            });
+            function getlistObjectsWithShootcode(){
+              if (shootcode == "") {
+                  alert('Please select correct shoot code');
+              }else{
+                $.post('/getlistObjectsWithShootcode',{shootcode:shootcode},function(result){
+                    console.log(result.data);
+                    if (result.status == "success" && result.data.length > 0) {
+                      var innerHtml = '';
+                      var tempHtml = '';
+                      for (var index = 0; index < result.data.length; index ++)
+                      {
+                          if (result.data[index].Key.includes(imagepattern) ==  false)
+                          {
+                             var arrTempNames =  new Array();
+                             arrURL.push(result.data[index].Key);
+                             arrTempNames = result.data[index].Key.split('-');
+                             arrNames.push(arrTempNames[arrTempNames.length - 1].replace('.mp4',''));
+                             arrCreatedAt.push(result.data[index].LastModified.split('T')[0]);
+                          }
+                      }
+                      if (arrURL.length>0) {
+                        $('#videoshow').attr('src',kAwsLink + arrURL[0]);
+                        vid.play();
+                        for (var index1 = 0; index1 < arrURL.length; index1 ++)
+                        {
+                          tempHtml =   '<div class="responsive">'+
+                          '<div class="gallery" id ="'+index1+'">'+'<video controls>'+
+                          '<source src="'+ kAwsLink + arrURL[index1] + '" type="video/mp4">'+
+                          '</video>'+'<div class="desc">'+'User: '+ arrNames[index1] + '<br></br>'+ 'LastModified: '+ arrCreatedAt[index1] +'</div>'+'</div>'+'</div>'
+                          innerHtml = innerHtml + tempHtml;
+                        }
+                        $('#content_gallery').html(innerHtml);
+                      }
+
+                    }else{
+                        alert('There is no video!');
+                    }
+                });
+              }
+
+            }
+        });
+
+
+
+
+  </script>
+  </html>
