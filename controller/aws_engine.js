@@ -230,10 +230,9 @@ exports.getshootcodelist = function(req,res)
   console.log('post shootcode '+ shootcode);
   s3.listObjects({Delimiter: '/'}, function(err, data) {
     if (err) {
-      return alert('There was an error listing your albums: ' + err.message);
+      console.log(err);
       res.status(404).json({'status' : 'failed'});
     } else {
-      console.log(data.CommonPrefixes);
       res.status(200).json({'status' : 'success','data':data.CommonPrefixes});
     }
   });
@@ -247,7 +246,7 @@ exports.getlistObjectsWithShootcode = function(req,res)
   console.log('Prefix ' + prefix);
   s3.listObjects({Prefix:prefix,Delimiter: '/'}, function(err, data) {
     if (err) {
-      return alert('There was an error listing your albums: ' + err.message);
+      console.log(err);
       res.status(404).json({'status' : 'failed'});
     } else {
       console.log(data.Contents);
