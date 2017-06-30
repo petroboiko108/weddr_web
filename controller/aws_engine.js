@@ -18,6 +18,48 @@ var s3 = new AWS.S3({
   params: {Bucket: bucketName}
 });
 ////////////User management api//////////////
+var elastictranscoder = new AWS.ElasticTranscoder({apiVersion: '2012-09-25'});
+exports.elastictranscoder = function(req, res)
+{
+  var videoname = req.body.videoname;
+  var shootcode = req.body.shootcode;
+  var username = req.body.username;
+  var params = {
+    PipelineId: '1488268599904-bdbk0a',
+    Inputs: [
+      {
+        AspectRatio: 'auto',
+        Container: 'auto',
+        FrameRate: 'auto',
+        Interlaced: 'auto',
+        Key: shootcode +'/'+ username +'/Input/'+videoname+'.mp4',
+        Resolution: 'auto',
+      }
+    ],
+    OutputKeyPrefix: shootcode+'/Output/',
+    Outputs: [
+      {
+        Key: 'Video/'+videoname+'.mp4',
+        PresetId: '1488061623936-v9huad',
+        Rotate: 'auto',
+        ThumbnailPattern: 'Thumb/'+videoname+'-{count}',
+      }
+    ],
+    UserMetadata: {
+      'contentType': 'video/mp4'
+    }
+  };
+  elastictranscoder.createJob(params, function(err, data) {
+    if (err){
+       console.log(err, err.stack);
+       res.json({'status' : 'error'});
+    } else
+    {
+      console.log(data);
+      res.json({'status':'success'});
+    }                // successful response
+  });
+}
 
 exports.index = function(req,res)
 {

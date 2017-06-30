@@ -13,6 +13,7 @@ module.exports = function(app) {
   app.post('/updateuser',aws_controller.updateuser);
   app.post('/updateuserwithfile',aws_controller.updateuserwithfile);
 
+  app.post('/admin/elastictranscoder',aws_controller.elastictranscoder);
   app.get('/getshootcodelist',aws_controller.getshootcodelist);
   app.post('/getlistObjectsWithShootcode',aws_controller.getlistObjectsWithShootcode);
   app.post('/uploadvideo',aws_controller.uploadvideo);
