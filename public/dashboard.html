@@ -52,13 +52,14 @@
                   </ul>
 
                   <ul class="right-navbar navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="assets/images/uk.png" alt="">United Kingdom</a>
+                    </li>
                       <li class="dropdown">
                           <a href="#" data-toggle="dropdown" class="dropdown-toggle"><label>Shoot codes</label></a>
                           <ul class="dropdown-menu dropdown-menu-scale user-dropdown" id = "menu_shootcodes"></ul>
                       </li>
-                      <li class="dropdown">
-                          <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="assets/images/uk.png" alt="">United Kingdom</a>
-                      </li>
+
                       <li class="dropdown">
                           <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img id = "nav_userphoto" src="assets/images/avtar.png" alt="" width="30" height = "30" class="img-circle"><label id="nav_username">Emily Doe</label></a>
                           <ul class="dropdown-menu dropdown-menu-scale user-dropdown">
@@ -161,6 +162,7 @@
               var arrImageURL = new Array();
               var arrImageNames = new Array();
               var arrImageCreatedAt = new Array();
+
                 $.get('/getshootcodelist',function(result){
                     if (result.status == 'success') {
                       var shootcodelist = new Array();
@@ -206,9 +208,6 @@
                   console.log('clicked shoot code '+ id);
                   getlistObjectsWithShootcode(id);
                 });
-
-
-
                   $('#videos').on('click','.responsivevideo',function(){
                     var obj = $(this);
                     console.log(obj);
@@ -241,7 +240,7 @@
                         }
                     });
                   });
-                  //getlistObjectsWithShootcode('me&me17356');
+                  // getlistObjectsWithShootcode('me&me17356');
                   function getlistObjectsWithShootcode(code){
                       arrURL = new Array();
                       arrNames = new Array();
@@ -299,6 +298,18 @@
                               for (var index2 = 0; index2 < arrImageURL.length; index2 ++)
                               {
 
+                                // tempImageHtml = '<div class="col-md-3 col-sm-6">' +
+                                //                 '<a class="gallery-box" href="' + kAwsLink + arrImageURL[index2] +'" data-lightbox="gallery">' +
+                                //                     '<div class="responsiveimage id = "'+ index2 +'">' +
+                                //                       '<div class="gallery">' +
+                                //                         '<img src="' + kAwsLink + arrImageURL[index2] + '">' +
+                                //
+                                //                       '</div>' +
+                                //                     '</div>' +
+                                //                 '</a>' + '<div class="descimage">' + arrImageNames[index2]
+                                //                 + '  '+ arrImageCreatedAt[index2] + '<i id = "'+ index2 +'" class="download fa fa-download"></i>'+'</div>' +
+                                //             '</div>'
+
                                 tempImageHtml = '<div class="col-md-3 col-sm-6">' +
                                                 '<a class="gallery-box" href="' + kAwsLink + arrImageURL[index2] +'" data-lightbox="gallery">' +
                                                     '<div class="responsiveimage id = "'+ index2 +'">' +
@@ -308,8 +319,12 @@
                                                       '</div>' +
                                                     '</div>' +
                                                 '</a>' + '<div class="descimage">' + arrImageNames[index2]
-                                                + '  '+ arrImageCreatedAt[index2] + '<i id = "'+ index2 +'" class="download fa fa-download"></i>'+'</div>' +
+                                                + '  '+ arrImageCreatedAt[index2] + '<a download=' + arrImageNames[index2]
+                                                + '  '+ arrImageCreatedAt[index2] + ' href="' + kAwsLink + arrImageURL[index2] + '" title="' + arrImageNames[index2]
+                                                + '  '+ arrImageCreatedAt[index2] + '"><i class="download fa fa-download"></i></a>' + '</div>' +
                                             '</div>'
+
+
                                 innerImageHtml = innerImageHtml + tempImageHtml;
                               }
                               $('#images').html(innerImageHtml);

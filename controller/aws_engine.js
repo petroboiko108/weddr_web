@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var multer = require('multer');
 var path = require('path');
 var mime = require('mime');
-
+// var request = require('request');
+var download = require('download-file')
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
@@ -330,21 +331,35 @@ exports.uploadvideo = function(req,res)
 }
 
 exports.downloadfile = function(req,res){
-   var url = req.body.url;
-   var destArr = url.split('/');
-   var dest = destArr[destArr.length - 1];
-   var file = fs.createWriteStream(dest);
-   var request = https.get(url,function(response){
-      response.pipe(file);
-      file.on('finish',function(){
-        res.status(200).json({
-          status : 'success'
-        });
+  //  var url = req.body.url;
+   var url = "http://i.imgur.com/G9bDaPH.jpg"
+
+  var options = {
+      directory: "./image",
+      filename: "cat.gif"
+  }
+  download(url, options, function(err){
+      if (err) throw err
+      res.status(200).json({
+        status : 'success'
       });
-   }).on('error',function(err){
-      fs.unlink(dest);
-      res.status(400).json({
-        status : 'error'
-      });
-   });
+  })
+  //  var destArr = url.split('/');
+  //  var dest = destArr[destArr.length - 1];
+  //  var file = fs.createWriteStream(dest);
+  //  var request = https.get(url,function(response){
+  //     response.pipe(file);
+  //     file.on('finish',function(){
+  //       res.status(200).json({
+  //         status : 'success'
+  //       });
+  //     });
+  //  }).on('error',function(err){
+  //     fs.unlink(dest);
+  //     res.status(400).json({
+  //       status : 'error'
+  //     });
+  //  });
+
+
 }
